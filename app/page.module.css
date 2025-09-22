@@ -1,0 +1,390 @@
+.page {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('/images/casteloInfinito.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Courier New', monospace;
+    overflow: hidden;
+    position: relative;
+}
+
+.page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.campoBatalha {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.vilao {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: auto;
+    padding: 0 40px;
+}
+
+.imagemVilao {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.infoVilao {
+    background: rgba(255, 255, 255, 0.9);
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.estVilao {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.estHeroi {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 3px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.heroi {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0 40px;
+}
+
+.heroiInfo {
+    background: rgba(255, 255, 255, 0.9);
+    border: 3px solid #333;
+    border-radius: 10px;
+    padding: 15px;
+    min-width: 250px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.imagemHeroi {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.nome {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.hp {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hpTexto {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+}
+
+.hpContainer {
+    flex: 1;
+    height: 20px;
+    background: #ddd;
+    border: 2px solid #333;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.hpVida {
+    height: 100%;
+    background: linear-gradient(90deg, #4CAF50 0%, #8BC34A 50%, #CDDC39 100%);
+    transition: width 0.8s ease, background-color 0.3s ease;
+    border-radius: 8px;
+}
+
+.hpVida[style*="width: 2"], .hpVida[style*="width: 1"], .hpVida[style*="width: 0"] {
+    background: linear-gradient(90deg, #f44336 0%, #FF5722 100%);
+}
+
+.hpVida[style*="width: 5"], .hpVida[style*="width: 4"], .hpVida[style*="width: 3"] {
+    background: linear-gradient(90deg, #FF9800 0%, #FFC107 100%);
+}
+
+.hpNum {
+    font-weight: bold;
+    color: #333;
+    font-size: 14px;
+    min-width: 60px;
+}
+
+.interfaceBatalha {
+    background: rgba(0, 0, 0, 0.8);
+    height: 200px;
+    border-top: 4px solid #333;
+    display: flex;
+    position: relative;
+    z-index: 2;
+}
+
+.logContainer {
+    flex: 1;
+    padding: 20px;
+}
+
+.log {
+    background: #f0f0f0;
+    border: 3px solid #333;
+    border-radius: 10px;
+    height: 100%;
+    padding: 15px;
+    overflow-y: auto;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+.log p {
+    margin: 0 0 8px 0;
+    color: #333;
+    animation: fadeIn 0.5s ease;
+}
+
+.log p:last-child {
+    font-weight: bold;
+    color: #d32f2f;
+}
+
+.containerAcoes {
+    width: 300px;
+    padding: 20px;
+}
+
+.acoes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    height: 100%;
+}
+
+.acoesBtn {
+    background: linear-gradient(145deg, #ffffff, #e0e0e0);
+    border: 3px solid #333;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.acoesBtn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #f5f5f5, #d0d0d0);
+}
+
+.acoesBtn:active:not(:disabled) {
+    transform: translateY(0);
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.acoesBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: #ccc;
+}
+
+.atacarBtn:not(:disabled) {
+    background: linear-gradient(145deg, #ff6b6b, #ee5a52);
+    color: white;
+}
+
+.defenderBtn:not(:disabled) {
+    background: linear-gradient(145deg, #4ecdc4, #45b7aa);
+    color: white;
+}
+
+.pocaoBtn:not(:disabled) {
+    background: linear-gradient(145deg, #a8e6cf, #88d8a3);
+    color: white;
+}
+
+.fugirBtn:not(:disabled) {
+    background: linear-gradient(145deg, #ffd93d, #ffcd02);
+    color: #333;
+}
+
+.turno {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    z-index: 3;
+    animation: pulse 2s infinite;
+    border: 2px solid #fff;
+}
+
+.fimJogo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    animation: fadeIn 0.5s ease;
+}
+
+.fimJogoConteudo {
+    background: linear-gradient(145deg, #ffffff, #f0f0f0);
+    border: 4px solid #333;
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    animation: scaleIn 0.5s ease;
+}
+
+.fimJogoTitulo {
+    font-size: 36px;
+    margin: 0 0 20px 0;
+    color: #333;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.fimJogoTexto {
+    font-size: 18px;
+    color: #555;
+    margin: 0 0 30px 0;
+    line-height: 1.5;
+}
+
+.reiniciarBtn {
+    background: linear-gradient(145deg, #4CAF50, #45a049);
+    border: 3px solid #333;
+    border-radius: 15px;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 15px 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+}
+
+.reiniciarBtn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(145deg, #5cbf60, #4CAF50);
+}
+
+.reiniciarBtn:active {
+    transform: translateY(0);
+    box-shadow: inset 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 768px) {
+    .page {
+        font-size: 14px;
+    }
+
+    .vilao, .heroi {
+        padding: 0 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .interfaceBatalha {
+        flex-direction: column;
+        height: auto;
+    }
+
+    .containerAcoes {
+        width: 100%;
+    }
+
+    .acoes {
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+    }
+
+    .spriteBox {
+        width: 100px;
+        height: 100px;
+    }
+
+    .estVilao, .estHeroi {
+        width: 80px;
+        height: 80px;
+    }
+}
