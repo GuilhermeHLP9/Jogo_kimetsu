@@ -13,7 +13,9 @@ export default function useGameManager() {
     const [turnoHeroi, setTurnoHeroi] = useState(true)
     const [jogoAtivo, setJogoAtivo] = useState(true)
     const [vencedor, setVencedor] = useState(null)
-    const [fugiu, setFugiu] = useState(true);
+    const [fugiu, setFugiu] = useState(true)
+    const [turnoVilao, setTurnoVilao] = useState(false)
+
 
     useEffect(() => {
         if (heroi.vida <= 0 && jogoAtivo) {
@@ -25,7 +27,25 @@ export default function useGameManager() {
             setJogoAtivo(false)
             adicionarLog(`🏆 ${heroi.nome} derrotou ${vilao.nome}! Você venceu!`)
         }
-    }, [heroi.vida, vilao.vida, jogoAtivo])
+
+        if (!turnoVilao) return
+        if (!jogoAtivo || fugiu || vilao.vida <= 0 || heroi.vida <= 0) {
+            setTurnoVilao(false)
+            return
+        }
+
+        let opcoes = Object.keys(acoesVilao)
+        if (vilao.vida > 50) {
+            opcoes = opcoes.filter(opcao => opcao !== "cura")
+        }
+
+        const escolha = opcoes[Math.floor(Math.random() * opcoes.length)]
+        acoesVilao[escolha]?.()
+
+        setTurnoVilao(false)
+        setTurnoHeroi(true)
+
+    }, [heroi.vida, vilao.vida, jogoAtivo, turnoVilao, fugiu])
 
     const modificarVida = (alvo, dano) => {
         const setter = alvo === "heroi" ? setHeroi : setVilao
@@ -84,6 +104,7 @@ export default function useGameManager() {
             adicionarLog(`${heroi.nome} tentou fugir!`)
             setFugiu(false)
             setTurnoHeroi(true)
+            setJogoAtivo(false)
         }
     }
 
@@ -107,24 +128,14 @@ export default function useGameManager() {
     }
 
     const handlerAcaoHeroi = (acao) => {
-        if (!turnoHeroi || !jogoAtivo) return
+        if (!turnoHeroi || !jogoAtivo)return
 
         acoesHeroi[acao]?.()
         setTurnoHeroi(false)
 
         setTimeout(() => {
-            if (!jogoAtivo || vilao.vida <= 0 || heroi.vida <= 0) {return}
-
-            let opcoes = Object.keys(acoesVilao)
-
-            if (vilao.vida > 50) {
-                opcoes = opcoes.filter(opcao => opcao !== "cura")
-            }
-
-            const escolha = opcoes[Math.floor(Math.random() * opcoes.length)]
-            acoesVilao[escolha]?.()
-            setTurnoHeroi(true)
-        },1700)
+            setTurnoVilao(true)
+        }, 1700)
     }
 
     return{
