@@ -5,6 +5,12 @@ import useGameManager from "@/hooks/gameManager";
 export default function Home() {
     const {heroi, vilao, log, turnoHeroi, handlerAcaoHeroi, jogoAtivo, vencedor, reiniciarJogo, fugiu} = useGameManager()
 
+    const getHpClass = (vida, vidaMaxima) => {
+        const porcentagem = (vida / vidaMaxima) * 100
+        if (porcentagem <= 25) return 'hpCritico'
+        if (porcentagem <= 50) return 'hpBaixo'
+        return 'hpNormal'
+    }
 
     return (
         <section className={styles.page}>
@@ -23,8 +29,8 @@ export default function Home() {
                             <p className={styles.hpTexto}>HP</p>
                             <div className={styles.hpContainer}>
                                 <div
-                                    className={styles.hpVida}
-                                    style={{width: `${vilao.vida}%`}}
+                                    className={`${styles.hpVida} ${styles[getHpClass(vilao.vida, 200)]}`}
+                                    style={{width: `${(vilao.vida / 200) * 100}%`}}
                                 ></div>
                             </div>
                             <p className={styles.hpNum}>{vilao.vida}/200</p>
@@ -39,7 +45,7 @@ export default function Home() {
                             <p className={styles.hpTexto}>HP</p>
                             <div className={styles.hpContainer}>
                                 <div
-                                    className={styles.hpVida}
+                                    className={`${styles.hpVida} ${styles[getHpClass(heroi.vida, 100)]}`}
                                     style={{width: `${heroi.vida}%`}}
                                 ></div>
                             </div>
