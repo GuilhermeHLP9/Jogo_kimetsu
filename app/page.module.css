@@ -402,9 +402,23 @@
         gap: 20px;
     }
 
+    .infoVilao, .heroiInfo {
+        min-width: 300px;
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .estVilao, .estHeroi {
+        width: 150px;
+        height: 150px;
+        margin: 0;
+    }
+
     .interfaceBatalha {
         flex-direction: column;
         height: auto;
+        background: rgba(0, 0, 0, 0.8);
+        border-top: 4px solid #333;
     }
 
     .containerAcoes {
@@ -416,13 +430,18 @@
         gap: 15px;
     }
 
-    .spriteBox {
-        width: 100px;
-        height: 100px;
+    .acoesBtn {
+        width: 100%;
+        height: 50px;
+        font-size: 12px;
     }
 
-    .estVilao, .estHeroi {
-        width: 80px;
-        height: 80px;
+    .turno {
+        position: relative;
+        transform: none;
+        left: auto;
+        top: 10px;
+        margin: 0 auto 10px auto;
+        width: fit-content;
     }
 }
