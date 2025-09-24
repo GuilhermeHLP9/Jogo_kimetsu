@@ -49,28 +49,53 @@ export default function useGameManager() {
 
     const acoesHeroi = {
         atacar: () => {
-            modificarVida("vilao", -15)
-            adicionarLog(`${heroi.nome} usou a respiração da água em ${vilao.nome} e causou 15 de dano`)
+            if(vilao.vida < 15){
+                modificarVida("vilao", 0 - vilao.vida)
+                adicionarLog(`${heroi.nome} usou a respiração da água em ${vilao.nome} e causou 15 de dano`)
+            }else {
+                modificarVida("vilao", -15)
+                adicionarLog(`${heroi.nome} usou a respiração da água em ${vilao.nome} e causou 15 de dano`)
+            }
         },
         especial: () => {
-            modificarVida("vilao", -50)
-            modificarVida("heroi", -15)
-            adicionarLog(`${vilao.nome} usou Hinokami Kagura em ${heroi.nome} e causou 50 de dano mas perdeu 15 de vida`)
+            if(vilao.vida < 50){
+                modificarVida("vilao", 0 - vilao.vida)
+                if(heroi.vida < 15){
+                    modificarVida("heroi", 0 - heroi.vida)
+                    adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 50 de dano mas perdeu 15 de vida`)
+                }else {
+                    modificarVida("heroi", -15)
+                    adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 50 de dano mas perdeu 15 de vida`)
+                }
+            }else {
+                modificarVida("vilao", -50)
+                modificarVida("heroi", -15)
+                adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 50 de dano mas perdeu 15 de vida`)}
         },
         respiracao: () => {
-            modificarVida("heroi", 15)
-            adicionarLog(`${heroi.nome} usou poção e recuperou 15 de vida`)
+            if(heroi.vida > 85){
+                modificarVida("heroi", 100 - heroi.vida)
+                adicionarLog(`${heroi.nome} usou a respiração e recuperou 15 de vida`)
+            }else {
+                modificarVida("heroi", 15)
+                adicionarLog(`${heroi.nome} usou a respiração e recuperou 15 de vida`)}
         },
         correr: () => {
             adicionarLog(`${heroi.nome} tentou fugir!`)
             setFugiu(false)
+            setTurnoHeroi(true)
         }
     }
 
     const acoesVilao = {
         atacar: () => {
-            modificarVida("heroi", -20)
-            adicionarLog(`${vilao.nome} atacou ${heroi.nome} e causou 20 de dano`)
+            if(heroi.vida < 20){
+                modificarVida("heroi", 0 - heroi.vida)
+                adicionarLog(`${vilao.nome} atacou ${heroi.nome} e causou ${0 - heroi.vida} de dano`)
+            }else{
+                modificarVida("heroi", -20)
+                adicionarLog(`${vilao.nome} atacou ${heroi.nome} e causou 20 de dano`)
+            }
         },
         cura: () => {
             modificarVida("vilao", 10)
@@ -88,7 +113,7 @@ export default function useGameManager() {
         setTurnoHeroi(false)
 
         setTimeout(() => {
-            if (vilao.vida <= 0 || heroi.vida <= 0) return
+            if (!jogoAtivo || vilao.vida <= 0 || heroi.vida <= 0) {return}
 
             let opcoes = Object.keys(acoesVilao)
 
