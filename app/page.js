@@ -76,28 +76,28 @@ export default function Home() {
                             onClick={() => handlerAcaoHeroi('atacar')}
                             disabled={!turnoHeroi || !jogoAtivo}
                         >
-                            ⚔️ Atacar
+                            Atacar
                         </button>
                         <button
-                            className={`${styles.acoesBtn} ${styles.defenderBtn}`}
+                            className={`${styles.acoesBtn} ${styles.especialBtn}`}
                             onClick={() => handlerAcaoHeroi('especial')}
                             disabled={!turnoHeroi || !jogoAtivo}
                         >
-                            🔥 Especial
+                            Especial
                         </button>
                         <button
-                            className={`${styles.acoesBtn} ${styles.pocaoBtn}`}
+                            className={`${styles.acoesBtn} ${styles.respiracaoBtn}`}
                             onClick={() => handlerAcaoHeroi('respiracao')}
                             disabled={!turnoHeroi || !jogoAtivo}
                         >
-                            💨 Respiração
+                            Respiração
                         </button>
                         <button
                             className={`${styles.acoesBtn} ${styles.fugirBtn}`}
                             onClick={() => handlerAcaoHeroi('correr')}
                             disabled={!turnoHeroi || !jogoAtivo}
                         >
-                            🏃‍♂️ Fugir
+                            Fugir
                         </button>
 
                         {!fugiu &&(
