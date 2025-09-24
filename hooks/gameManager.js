@@ -58,19 +58,19 @@ export default function useGameManager() {
             }
         },
         especial: () => {
-            if(vilao.vida < 50){
+            if(vilao.vida < 40){
                 modificarVida("vilao", 0 - vilao.vida)
                 if(heroi.vida < 15){
                     modificarVida("heroi", 0 - heroi.vida)
-                    adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 50 de dano mas perdeu 15 de vida`)
+                    adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 40 de dano mas perdeu 15 de vida`)
                 }else {
                     modificarVida("heroi", -15)
-                    adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 50 de dano mas perdeu 15 de vida`)
+                    adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 40 de dano mas perdeu 15 de vida`)
                 }
             }else {
-                modificarVida("vilao", -50)
+                modificarVida("vilao", -40)
                 modificarVida("heroi", -15)
-                adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 50 de dano mas perdeu 15 de vida`)}
+                adicionarLog(`${heroi.nome} usou Hinokami Kagura em ${vilao.nome} e causou 40 de dano mas perdeu 15 de vida`)}
         },
         respiracao: () => {
             if(heroi.vida > 85){
@@ -91,7 +91,7 @@ export default function useGameManager() {
         atacar: () => {
             if(heroi.vida < 20){
                 modificarVida("heroi", 0 - heroi.vida)
-                adicionarLog(`${vilao.nome} atacou ${heroi.nome} e causou ${0 - heroi.vida} de dano`)
+                adicionarLog(`${vilao.nome} atacou ${heroi.nome} e causou 20 de dano`)
             }else{
                 modificarVida("heroi", -20)
                 adicionarLog(`${vilao.nome} atacou ${heroi.nome} e causou 20 de dano`)
@@ -124,7 +124,7 @@ export default function useGameManager() {
             const escolha = opcoes[Math.floor(Math.random() * opcoes.length)]
             acoesVilao[escolha]?.()
             setTurnoHeroi(true)
-        },1000)
+        },1700)
     }
 
     return{
