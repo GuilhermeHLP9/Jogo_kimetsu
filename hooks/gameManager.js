@@ -64,14 +64,7 @@ export default function useGameManager() {
     }
 
     const reiniciarJogo = () => {
-        setHeroi(heroiInicial)
-        setVilao(vilaoInicial)
-        setLog([])
-        setTurnoHeroi(true)
-        setJogoAtivo(true)
-        setVencedor(null)
-        setFugiu(false)
-        setTurnoVilao(false)
+        window.location.reload()
         adicionarLog("🔄 Uma nova batalha começou!")
     }
 

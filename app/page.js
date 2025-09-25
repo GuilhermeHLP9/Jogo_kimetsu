@@ -113,9 +113,7 @@ export default function Home() {
                                     <p className={styles.fimJogoTexto}>{`${heroi.nome} Fugiu da luta!`}</p>
                                     <button
                                         className={styles.reiniciarBtn}
-                                        onClick={setTimeout(() => {
-                                            window.location.reload()
-                                        }, 1500)}
+                                        onClick={reiniciarJogo}
                                     >
                                         🔄 Jogar Novamente
                                     </button>
@@ -128,13 +126,31 @@ export default function Home() {
             </div>
 
             <div className={styles.turno}>
-                {!jogoAtivo ?
+                {fugiu ? `${heroi.nome} fugiu!` : !jogoAtivo ?
                     `🎮 Jogo Finalizado - ${vencedor} Venceu!` :
                     (turnoHeroi ? "Seu turno!" : "Turno do inimigo...")
                 }
             </div>
+            {fugiu && (
+                <div className={styles.fimJogo}>
+                    <div className={styles.fimJogoConteudo}>
+                        <h2 className={styles.fimJogoTitulo}>
+                            {`${heroi.nome} Fugiu do ${vilao.nome}!`}
+                        </h2>
+                        <p className={styles.fimJogoTexto}>
+                            {`${heroi.nome} não aguentou a luta e resolveu fugir!`}
+                        </p>
+                        <button
+                            className={styles.reiniciarBtn}
+                            onClick={reiniciarJogo}
+                        >
+                            🔄 Jogar Novamente
+                        </button>
+                    </div>
+                </div>
+            )}
 
-            {!jogoAtivo && (
+            {!jogoAtivo && !fugiu && (
                 <div className={styles.fimJogo}>
                     <div className={styles.fimJogoConteudo}>
                         <h2 className={styles.fimJogoTitulo}>
@@ -155,6 +171,7 @@ export default function Home() {
                     </div>
                 </div>
             )}
+
         </section>
     );
 }
