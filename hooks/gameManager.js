@@ -13,7 +13,7 @@ export default function useGameManager() {
     const [turnoHeroi, setTurnoHeroi] = useState(true)
     const [jogoAtivo, setJogoAtivo] = useState(true)
     const [vencedor, setVencedor] = useState(null)
-    const [fugiu, setFugiu] = useState(true)
+    const [fugiu, setFugiu] = useState(false)
     const [turnoVilao, setTurnoVilao] = useState(false)
 
 
@@ -27,25 +27,32 @@ export default function useGameManager() {
             setJogoAtivo(false)
             adicionarLog(`🏆 ${heroi.nome} derrotou ${vilao.nome}! Você venceu!`)
         }
+    }, [heroi.vida, vilao.vida, jogoAtivo, turnoVilao])
 
+    useEffect(() => {
         if (!turnoVilao) return
         if (!jogoAtivo || fugiu || vilao.vida <= 0 || heroi.vida <= 0) {
             setTurnoVilao(false)
             return
         }
 
-        let opcoes = Object.keys(acoesVilao)
-        if (vilao.vida > 50) {
-            opcoes = opcoes.filter(opcao => opcao !== "cura")
-        }
+        // Adiciona um pequeno delay para executar a ação do vilão
+        const timeout = setTimeout(() => {
+            let opcoes = Object.keys(acoesVilao)
+            if (vilao.vida > 50) {
+                opcoes = opcoes.filter(opcao => opcao !== "cura")
+            }
 
-        const escolha = opcoes[Math.floor(Math.random() * opcoes.length)]
-        acoesVilao[escolha]?.()
+            const escolha = opcoes[Math.floor(Math.random() * opcoes.length)]
+            acoesVilao[escolha]?.()
 
-        setTurnoVilao(false)
-        setTurnoHeroi(true)
+            setTurnoVilao(false)
+            setTurnoHeroi(true)
+        }, 100)
 
-    }, [heroi.vida, vilao.vida, jogoAtivo, turnoVilao, fugiu])
+        // Cleanup function para cancelar o timeout se o componente for desmontado
+        return () => clearTimeout(timeout)
+    }, [turnoVilao])
 
     const modificarVida = (alvo, dano) => {
         const setter = alvo === "heroi" ? setHeroi : setVilao
@@ -63,7 +70,8 @@ export default function useGameManager() {
         setTurnoHeroi(true)
         setJogoAtivo(true)
         setVencedor(null)
-        setFugiu(true)
+        setFugiu(false)
+        setTurnoVilao(false)
         adicionarLog("🔄 Uma nova batalha começou!")
     }
 
@@ -102,7 +110,7 @@ export default function useGameManager() {
         },
         correr: () => {
             adicionarLog(`${heroi.nome} tentou fugir!`)
-            setFugiu(false)
+            setFugiu(true)
             setTurnoHeroi(true)
             setJogoAtivo(false)
         }

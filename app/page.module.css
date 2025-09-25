@@ -26,12 +26,13 @@
 }
 
 .campoBatalha {
-    flex: 1;
+    flex: 0 1 auto;
     display: flex;
     flex-direction: column;
     padding: 20px;
     position: relative;
     z-index: 1;
+    min-height: 400px;
 }
 
 .vilao {
@@ -59,16 +60,16 @@
 }
 
 .estVilao {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
     object-fit: cover;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     margin-right: 100px;
 }
 
 .estHeroi {
-    width: 250px;
-    height: 250px;
+    width: 220px;
+    height: 220px;
     object-fit: cover;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     margin-left: 100px;
@@ -155,7 +156,7 @@
 
 .interfaceBatalha {
     background: transparent;
-    height: 200px;
+    height: 280px;
     display: flex;
     position: relative;
     z-index: 2;
@@ -163,7 +164,7 @@
 
 .logContainer {
     flex: 1;
-    padding: 20px;
+    padding: 25px;
 }
 
 .log {
@@ -171,14 +172,14 @@
     border: 3px solid #333;
     border-radius: 10px;
     height: 100%;
-    padding: 15px;
+    padding: 20px;
     overflow-y: auto;
-    font-size: 14px;
-    line-height: 1.4;
+    font-size: 16px;
+    line-height: 1.5;
 }
 
 .log p {
-    margin: 0 0 8px 0;
+    margin: 0 0 12px 0;
     color: #333;
     animation: fadeIn 0.5s ease;
 }
@@ -189,14 +190,15 @@
 }
 
 .containerAcoes {
-    width: 300px;
-    padding: 20px;
+    width: 380px;
+    padding: 25px;
+    margin-right: 30px;
 }
 
 .acoes {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    gap: 15px;
     height: 100%;
 }
 
@@ -204,7 +206,7 @@
     background: linear-gradient(145deg, #ffffff, #e0e0e0);
     border: 3px solid #333;
     border-radius: 10px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
     color: #333;
     cursor: pointer;
@@ -214,9 +216,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 5px;
-    height: 60px;
-    width: 125px;
+    gap: 8px;
+    height: 80px;
+    width: 160px;
 }
 
 .acoesBtn:active:not(:disabled) {

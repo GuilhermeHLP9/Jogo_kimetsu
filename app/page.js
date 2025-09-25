@@ -106,14 +106,16 @@ export default function Home() {
                             Fugir
                         </button>
 
-                        {!fugiu &&(
+                        {fugiu &&(
                             <div className={styles.fimJogo}>
                                 <div className={styles.fimJogoConteudo}>
                                     <h2 className={styles.fimJogoTitulo}>🏃‍♂️FUGIU!</h2>
                                     <p className={styles.fimJogoTexto}>{`${heroi.nome} Fugiu da luta!`}</p>
                                     <button
                                         className={styles.reiniciarBtn}
-                                        onClick={reiniciarJogo}
+                                        onClick={setTimeout(() => {
+                                            window.location.reload()
+                                        }, 1500)}
                                     >
                                         🔄 Jogar Novamente
                                     </button>
