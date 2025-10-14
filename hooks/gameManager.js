@@ -36,7 +36,6 @@ export default function useGameManager() {
             return
         }
 
-        // Adiciona um pequeno delay para executar a ação do vilão
         const timeout = setTimeout(() => {
             let opcoes = Object.keys(acoesVilao)
             if (vilao.vida > 50) {
@@ -50,7 +49,6 @@ export default function useGameManager() {
             setTurnoHeroi(true)
         }, 100)
 
-        // Cleanup function para cancelar o timeout se o componente for desmontado
         return () => clearTimeout(timeout)
     }, [turnoVilao])
 
